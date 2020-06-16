@@ -3,6 +3,7 @@ A simple screen sharing server/client app by Express, Axios and Vuejs
 # Install
 Using npm:   
 ```bash
+$ cd ./node_modules/simplescreensharing
 $ npm i simplescreensharing
 ```
 # Usage:
