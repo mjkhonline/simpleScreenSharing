@@ -1,6 +1,6 @@
 {
   "name": "simplescreensharing",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A simple client/server app for sharing PC screen with other local devices",
   "scripts": {
     "server": "node ./server/server.js",
@@ -10,8 +10,14 @@
     "express",
     "javascript",
     "axios",
-    "ScreenSharing"
+    "ScreenSharing",
+    "client",
+    "Vuejs"
   ],
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/mjkhonline/simpleScreenSharing.git"
+  },
   "author": "mohammad Javad Khademian",
   "license": "MIT",
   "dependencies": {
