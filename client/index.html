@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Simple Screen Sharing Client App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+  <body>
+    <div class="container-fluid" id="app">
+      <div class="row">
+        <div class="col-12">
+          <img v-if="imgSrc" :src="imgSrc" alt="screenshot" class="w-100 mh-100"/>
+        </div>
+        <div class="col-12 p-5">
+          <button class="btn btn-lg btn-primary btn-block" type="button" @click="toggle(!running)">{{buttonCaption}}</button>
+          <p class="my-3">Run server on the host and then click start.</p>
+          <div v-if="errorMsg" class="alert alert-warning" role="alert">
+            {{errorMsg}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+     var app = new Vue({
+      el: '#app',
+      data: {
+        running:false,
+        imgSrc:'',
+        intervalId:null,
+        errorMsg:''
+      },
+      methods:{
+        toggle: function(val){
+          this.running = val
+          if (this.running){
+            this.intervalId = setInterval(this.getScreenShot,350)
+            this.errorMsg = ''
+          }else{
+            clearInterval(this.intervalId)
+            this.imgSrc= ''
+          }
+        },
+        getScreenShot:function(){
+          axios.get('http://192.168.1.100:3000/live',{timeout: 2500}).then( response =>{
+            let image = this.buffer2base64(response.data.image.data)
+            this.imgSrc= 'data:image/jpeg;base64,' + image.toString('base64')
+            }
+          ).catch( error =>{
+            this.errorMsg = error
+            this.toggle(false)
+          }
+          )
+        },
+        buffer2base64: function(buffer){
+          let binary = ''
+          let bytes = new Uint8Array( buffer )
+          let len = bytes.byteLength
+          for (let i = 0; i < len; i++) {
+            binary += String.fromCharCode( bytes[ i ] )
+          }
+          return window.btoa( binary )
+        }
+      },
+      computed:{
+        buttonCaption:function(){
+          return this.running ? "Stop":"Start"
+        }
+      }
+    })
+    </script>
+  </body>
+</html>
