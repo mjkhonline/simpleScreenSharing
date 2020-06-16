@@ -1,0 +1,16 @@
+{
+  "name": "simpleScreenSharing",
+  "version": "0.0.1",
+  "description": "A simple client/server app for sharing PC screen with other local devices",
+  "scripts": {
+    "server": "node ./server/server.js"
+  },
+  "keywords": ["express","javascript","axios","ScreenSharing"],
+  "author": "mohammad Javad Khademian",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "screenshot-desktop": "^1.12.1"
+  }
+}
