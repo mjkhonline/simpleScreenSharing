@@ -1,9 +1,10 @@
 {
-  "name": "simpleScreenSharing",
-  "version": "0.0.1",
+  "name": "@parsilver/simplescreensharing",
+  "version": "0.1.0",
   "description": "A simple client/server app for sharing PC screen with other local devices",
   "scripts": {
-    "server": "node ./server/server.js"
+    "server": "node ./server/server.js",
+    "test": "echo \"No test specified\""
   },
   "keywords": ["express","javascript","axios","ScreenSharing"],
   "author": "mohammad Javad Khademian",
